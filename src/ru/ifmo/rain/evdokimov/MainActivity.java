@@ -17,7 +17,7 @@ public class MainActivity extends Activity {
 		@Override
 		public void onDraw(Canvas canvas) {
 			Paint paint = new Paint();
-			paint.setColor(Color.CYAN);
+			paint.setColor(Color.YELLOW);
 			canvas.drawRect(10, 10, 110, 110, paint);
 		}
 	}
