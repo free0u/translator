@@ -11,6 +11,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity implements OnClickListener {
 //	class MainView extends View {
@@ -68,6 +69,16 @@ public class MainActivity extends Activity implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.button1:
 			Intent intent = new Intent(this, TranslateActivity.class);
+			String textToTranslate = eText.getText().toString();
+			
+			if (textToTranslate.isEmpty()) {
+				Toast.makeText(getApplicationContext(), R.string.emptystring, Toast.LENGTH_SHORT).show();
+				return;
+			}
+			
+			intent.putExtra("translate", getTranslate(textToTranslate));
+			intent.putExtra("picturesUrl", getPicturesUrl(textToTranslate));
+			
 			startActivity(intent);
 			break;
 		default:
