@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class MainActivity extends Activity implements OnClickListener {
@@ -23,9 +24,15 @@ public class MainActivity extends Activity implements OnClickListener {
 //		}
 //	}
 	Button btnTranslate;
-	TextView tv;
+	TextView tView;
+	EditText eText;
 	boolean f = true;
 	
+	@Override
+	public void onResume() {
+		super.onResume();
+		eText.setText("");
+	}
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,9 +41,10 @@ public class MainActivity extends Activity implements OnClickListener {
         setContentView(R.layout.main);
         
         btnTranslate = (Button)findViewById(R.id.button1);
-        tv = (TextView)findViewById(R.id.textView1);
-
-		btnTranslate.setOnClickListener(this);
+        tView = (TextView)findViewById(R.id.textView1);
+        eText = (EditText)findViewById(R.id.editText1);
+        
+        btnTranslate.setOnClickListener(this);
     }
 
 

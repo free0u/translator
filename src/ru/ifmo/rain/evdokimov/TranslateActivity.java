@@ -5,6 +5,8 @@ import android.os.Bundle;
 
 public class TranslateActivity extends Activity {
 	
+	
+	
 	@Override
 	public void onCreate(Bundle state) {
 		super.onCreate(state);
