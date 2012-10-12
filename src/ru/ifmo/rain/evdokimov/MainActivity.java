@@ -1,5 +1,7 @@
 package ru.ifmo.rain.evdokimov;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -28,6 +30,20 @@ public class MainActivity extends Activity implements OnClickListener {
 	EditText eText;
 	boolean f = true;
 	
+	// заглушка для перевода
+	private String getTranslate(String s) {
+		return s;
+	}
+	
+	// заглушка для картинок
+	private ArrayList<String> getPicturesUrl(String s) {
+		ArrayList<String> res = new ArrayList<String>();
+		res.add("http://grandwallpapers.net/wallpapers/igraushii-kotenok/igraushii-kotenok_1920x1200.jpg");
+		return res;
+	}
+	
+	
+	// очистим поле для ввода
 	@Override
 	public void onResume() {
 		super.onResume();
