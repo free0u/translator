@@ -11,13 +11,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/translate" />
-
+
     <TextView
         android:id="@+id/textViewTranslate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:text="Medium Text"
+        android:text="Text"
         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp" >
+
+        <LinearLayout
+            android:id="@+id/linLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
