@@ -39,7 +39,19 @@ public class MainActivity extends Activity implements OnClickListener {
 	// stub for pictures
 	private ArrayList<String> getPicturesUrl(String s) {
 		ArrayList<String> res = new ArrayList<String>();
-		res.add("http://grandwallpapers.net/wallpapers/igraushii-kotenok/igraushii-kotenok_1920x1200.jpg");
+		String[] arr = {"http://rodnik-dobra.ru/wp-content/uploads/2011/10/%D0%BA%D0%BE%D1%82%D1%8F%D1%82%D0%B0.jpg",
+			"http://www.google.com/logos/2012/alicia-moreau-de-justo-12-hp.jpg",
+			"http://www.google.com/logos/2012/Ivo_Andric-2012-hp.jpg",
+			"http://www.google.com/logos/2012/uganda12-hp.jpg",
+			"http://www.google.com/logos/2012/janusz-korczak-2012-hp.jpg",
+			"http://www.google.com/logos/2012/Brazil_Elections-2012-hp.jpgs", 
+			"http://www.google.com/logos/2012/david-unaipon-12-hp.jpg",
+			"http://www.google.com/logos/2012/Moon_Festival-2012-hp.jpg",
+			"http://www.google.com/logos/2012/chuseok12-hp.jpg"
+		};
+		for (int i = 0; i < 10; ++i) {
+			res.add(arr[i % arr.length]);
+		}
 		return res;
 	}
 	
@@ -71,11 +83,10 @@ public class MainActivity extends Activity implements OnClickListener {
 			Intent intent = new Intent(this, TranslateActivity.class);
 			String textToTranslate = eText.getText().toString();
 			
-			// TODO uncomment
-//			if (textToTranslate.isEmpty()) {
-//				Toast.makeText(getApplicationContext(), R.string.emptystring, Toast.LENGTH_SHORT).show();
-//				return;
-//			}
+			if (textToTranslate.length() == 0) {
+				Toast.makeText(getApplicationContext(), R.string.emptystring, Toast.LENGTH_SHORT).show();
+				return;
+			}
 			
 			intent.putExtra("translate", getTranslate(textToTranslate));
 			intent.putExtra("picturesUrl", getPicturesUrl(textToTranslate));

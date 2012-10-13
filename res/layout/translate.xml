@@ -3,20 +3,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
     android:layout_marginTop="10dp"
     android:orientation="vertical" >
-
+
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/translate" />
-
+
     <TextView
         android:id="@+id/textViewTranslate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:text="Text"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
