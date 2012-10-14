@@ -6,31 +6,25 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 
-import android.util.Log;
-
 public class ImageParser {
 	public ImageParser() {
 
 	}
 
-	public ArrayList parse(String query) throws IOException {
+	public ArrayList<String> parse(String query) throws IOException {
 		// typical query: http://www.google.ru/search?q=my+query&tbm=isch
 		query = query.replace(' ', '+');
 		final ArrayList<String> imageUrls = new ArrayList<String>();
 		final String urlString = "http://www.google.ru/search?q=" + query
 				+ "&tbm=isch";
-		
 		Thread t = new Thread(new Runnable() {
 			public void run() {
 				try {
 					URL url = new URL(urlString);
 					URLConnection connection = url.openConnection();
-					Log.i("TIME", "GG");
 					connection.connect();
-					Log.i("TIME", "GGG");
 					InputStreamReader reader = new InputStreamReader(
 							connection.getInputStream());
-					Log.i("TIME", "GGGG");
 					StringBuilder page = new StringBuilder();
 					int count = 0;
 					char[] buffer = new char[50000];
@@ -40,9 +34,10 @@ public class ImageParser {
 							page.append(buffer);
 						}
 					}
+					
 					int startUrl, finishUrl;
-
 					for (int i = 0; i < 10; i++) {
+						//parsing address
 						startUrl = page.indexOf("imgurl") + 7;
 						finishUrl = page.indexOf("&amp", startUrl);
 						imageUrls.add(page.substring(startUrl, finishUrl));
@@ -61,6 +56,7 @@ public class ImageParser {
 		try {
 			t.join();
 		} catch (InterruptedException e) {
+		
 		}
 		return imageUrls;
 	}
