@@ -1,6 +1,5 @@
 package ru.ifmo.rain.evdokimov;
 
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
@@ -11,7 +10,7 @@ public class ImageParser {
 
 	}
 
-	public ArrayList<String> parse(String query) throws IOException {
+	public ArrayList<String> parse(String query) {
 		// typical query: http://www.google.ru/search?q=my+query&tbm=isch
 		query = query.replace(' ', '+');
 		final ArrayList<String> imageUrls = new ArrayList<String>();
@@ -19,7 +18,7 @@ public class ImageParser {
 				+ "&tbm=isch";
 		Thread t = new Thread(new Runnable() {
 			public void run() {
-				try {
+				try {	
 					URL url = new URL(urlString);
 					URLConnection connection = url.openConnection();
 					connection.connect();

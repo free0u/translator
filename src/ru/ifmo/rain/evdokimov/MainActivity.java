@@ -1,9 +1,5 @@
 package ru.ifmo.rain.evdokimov;
 
-
-import java.io.IOException;
-import java.util.ArrayList;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,40 +15,6 @@ public class MainActivity extends Activity implements OnClickListener {
 	Button btnTranslate;
 	TextView tView;
 	EditText eText;
-	boolean f = true;
-	
-	// stub for translate
-	private String getTranslate(String s) {
-		return s;
-	}
-	
-	// stub for pictures
-	private ArrayList<String> getPicturesUrl(String s) {
-		ArrayList<String> res = new ArrayList<String>();
-		String[] arr = {"http://rodnik-dobra.ru/wp-content/uploads/2011/10/%D0%BA%D0%BE%D1%82%D1%8F%D1%82%D0%B0.jpg",
-			"http://www.google.com/logos/2012/alicia-moreau-de-justo-12-hp.jpg",
-			"http://www.google.com/logos/2012/Ivo_Andric-2012-hp.jpg",
-			"http://www.google.com/logos/2012/uganda12-hp.jpg",
-			"http://www.google.com/logos/2012/janusz-korczak-2012-hp.jpg",
-			"http://www.google.com/logos/2012/Brazil_Elections-2012-hp.jpgs", 
-			"http://www.google.com/logos/2012/david-unaipon-12-hp.jpg",
-			"http://www.google.com/logos/2012/Moon_Festival-2012-hp.jpg",
-			"http://www.google.com/logos/2012/chuseok12-hp.jpg"
-		};
-		for (int i = 0; i < 10; ++i) {
-			res.add(arr[i % arr.length]);
-		}
-		ImageParser imageParser = new ImageParser();
-		try {
-			return imageParser.parse(s);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-		//return res;
-	}
-	
 	
 	// clear input form
 	@Override
@@ -86,8 +48,7 @@ public class MainActivity extends Activity implements OnClickListener {
 				return;
 			}
 			
-			intent.putExtra("translate", getTranslate(textToTranslate));
-			intent.putExtra("picturesUrl", getPicturesUrl(textToTranslate));
+			intent.putExtra("text", textToTranslate);
 			
 			startActivity(intent);
 			break;

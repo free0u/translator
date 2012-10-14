@@ -4,6 +4,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class TranslateActivity extends Activity {
@@ -23,44 +25,57 @@ public class TranslateActivity extends Activity {
 	TextView tv;
 	LinearLayout lin;
 	ImageView imageView;
+	ProgressBar progressBar;
+	
+	Handler handler;
+	final int STATUS_TRANSLATE = 0;
+	final int STATUS_PICTURE = 1;
+	int indexOfPicture = 0;
+	LayoutInflater lInflater;
+	ImageParser imageParser;
+	Message msg;
+	
+	private String getTranslate(String s) {
+		return "hello";
+	}
 	
 	private void update() {
 		Intent intent = getIntent();
-		String translate = intent.getExtras().getString("translate");
-		tv.setText(translate);
-		ArrayList<String> urls = intent.getExtras().getStringArrayList("picturesUrl");
-		if (urls == null) return;
+		final String translate = intent.getExtras().getString("text");
 		
-		LayoutInflater lInflater = getLayoutInflater();
-		for (int i = 0; i < urls.size(); ++i) {
-			String url = urls.get(i);
-			View item = lInflater.inflate(R.layout.itemimage, lin, false);
-			imageView = (ImageView)item.findViewById(R.id.itemImageView);
-			imageView.setImageResource(R.drawable.ic_launcher);
-			lin.addView(imageView);
-			updateImage(url, imageView);
-		}
-	}
-	
-	private void updateImage(final String url, final ImageView imageView) {
-
-		final Handler handler = new Handler() {
+		lInflater = getLayoutInflater();
+		imageParser = new ImageParser();
+		
+		handler = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
-				Bitmap bm = (Bitmap)msg.obj;
-				imageView.setImageBitmap(bm);
+				if (msg.what == STATUS_TRANSLATE) {
+					tv.setText((String)msg.obj);
+				} else if (msg.what == STATUS_PICTURE) {
+					View item = lInflater.inflate(R.layout.itemimage, lin, false);
+					imageView = (ImageView)item.findViewById(R.id.itemImageView);
+					imageView.setImageBitmap((Bitmap)msg.obj);
+					lin.addView(imageView);
+					progressBar.setVisibility(View.GONE);
+				}
 			}
 		};
 		
 		Thread th = new Thread(new Runnable() {
 			public void run() {
-				// TODO Auto-generated method stub
-				Bitmap bm = getBitmapFromUrl(url);
-				if (bm != null) {
-					handler.sendMessage(handler.obtainMessage(0, bm));
+				String res = getTranslate(translate);
+				msg = handler.obtainMessage(STATUS_TRANSLATE, res);
+				handler.sendMessage(msg);
+				
+				ArrayList<String> urls = imageParser.parse(translate);
+				if (urls == null) return;
+				
+				for (String url : urls) {
+					Bitmap bm = getBitmapFromUrl(url);
+					msg = handler.obtainMessage(STATUS_PICTURE, bm);
+					handler.sendMessage(msg);
 				}
 			}
-			
 		});
 		th.start();
 	}
@@ -83,6 +98,8 @@ public class TranslateActivity extends Activity {
 		setContentView(R.layout.translate);
 		tv = (TextView)findViewById(R.id.textViewTranslate);
 		lin = (LinearLayout)findViewById(R.id.linLayout);
+		progressBar = (ProgressBar)findViewById(R.id.progressBar1);
+		
 		update();
 	}
 }
