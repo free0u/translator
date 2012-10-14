@@ -1,5 +1,6 @@
 package ru.ifmo.rain.evdokimov;
 
+
 import java.util.ArrayList;
 
 import android.app.Activity;
@@ -14,18 +15,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity implements OnClickListener {
-//	class MainView extends View {
-//		public MainView(Context context) {
-//			super(context);
-//		}
-//		
-//		@Override
-//		public void onDraw(Canvas canvas) {
-//			Paint paint = new Paint();
-//			paint.setColor(Color.YELLOW);
-//			canvas.drawRect(10, 10, 110, 110, paint);
-//		}
-//	}
 	Button btnTranslate;
 	TextView tView;
 	EditText eText;
