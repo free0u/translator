@@ -1,1 +1,4 @@
-Работа с изображениями
+Working with images.
+Class ImageParser.
+ImageParser methods:
+ArrayList<String> parse(String query) 
