@@ -2,10 +2,9 @@ package ru.ifmo.rain.evdokimov;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 
 import android.util.Log;
 
@@ -14,10 +13,10 @@ public class ImageParser {
 
 	}
 
-	public String[] Parse(String query) throws IOException {
-		// http://www.google.ru/search?q=my+query&tbm=isch/
+	public ArrayList parse(String query) throws IOException {
+		// typical query: http://www.google.ru/search?q=my+query&tbm=isch
 		query = query.replace(' ', '+');
-		final String[] imageUrls = new String[10];
+		final ArrayList<String> imageUrls = new ArrayList<String>();
 		final String urlString = "http://www.google.ru/search?q=" + query
 				+ "&tbm=isch";
 		
@@ -33,7 +32,6 @@ public class ImageParser {
 							connection.getInputStream());
 					Log.i("TIME", "GGGG");
 					StringBuilder page = new StringBuilder();
-					//reader.skip(140000); // fix!
 					int count = 0;
 					char[] buffer = new char[50000];
 					while (count >= 0) {
@@ -47,7 +45,7 @@ public class ImageParser {
 					for (int i = 0; i < 10; i++) {
 						startUrl = page.indexOf("imgurl") + 7;
 						finishUrl = page.indexOf("&amp", startUrl);
-						imageUrls[i] = page.substring(startUrl, finishUrl);
+						imageUrls.add(page.substring(startUrl, finishUrl));
 						page.delete(0, finishUrl);
 						startUrl = page.indexOf("imgurl");
 						page.delete(0, startUrl - 1);

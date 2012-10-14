@@ -1,6 +1,7 @@
 package ru.ifmo.rain.evdokimov;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Context;
@@ -13,16 +14,15 @@ import android.os.Bundle;
 import android.view.View;
 
 public class MainActivity extends Activity {
-	String[] ans;
+	ArrayList<String> ans;
 
 	class MainView extends View {
 		public MainView(Context context) throws IOException {
 			super(context);
 
 			ImageParser parser = new ImageParser();
-			ans = new String[10];
 			String query = "cat wiki";
-			ans = parser.Parse(query);
+			ans = parser.parse(query);
 		}
 
 		@Override
@@ -32,7 +32,7 @@ public class MainActivity extends Activity {
 			canvas.drawRect(10, 10, 110, 110, paint);
 
 			for (int i = 0; i < 10; i++) {
-				canvas.drawText(ans[i], 5, i * 50 + 5, paint);
+				canvas.drawText(ans.get(i), 5, i * 50 + 5, paint);
 			}
 
 		}
