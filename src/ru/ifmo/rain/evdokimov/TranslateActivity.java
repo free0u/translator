@@ -29,6 +29,7 @@ public class TranslateActivity extends Activity {
 		String translate = intent.getExtras().getString("translate");
 		tv.setText(translate);
 		ArrayList<String> urls = intent.getExtras().getStringArrayList("picturesUrl");
+		if (urls == null) return;
 		
 		LayoutInflater lInflater = getLayoutInflater();
 		for (int i = 0; i < urls.size(); ++i) {

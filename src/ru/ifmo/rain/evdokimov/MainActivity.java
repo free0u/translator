@@ -1,6 +1,7 @@
 package ru.ifmo.rain.evdokimov;
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import android.app.Activity;
@@ -41,7 +42,15 @@ public class MainActivity extends Activity implements OnClickListener {
 		for (int i = 0; i < 10; ++i) {
 			res.add(arr[i % arr.length]);
 		}
-		return res;
+		ImageParser imageParser = new ImageParser();
+		try {
+			return imageParser.parse(s);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+		//return res;
 	}
 	
 	
