@@ -31,7 +31,6 @@ public class TranslateActivity extends Activity {
 	final int STATUS_PICTURE = 1;
 	int indexOfPicture = 0;
 	LayoutInflater lInflater;
-	ImageParser imageParser;
 	Message msg;
 	
 	private String getTranslate(String s) {
@@ -43,7 +42,6 @@ public class TranslateActivity extends Activity {
 		final String translate = intent.getExtras().getString("text");
 		
 		lInflater = getLayoutInflater();
-		imageParser = new ImageParser();
 		
 		handler = new Handler() {
 			@Override
@@ -66,7 +64,7 @@ public class TranslateActivity extends Activity {
 				msg = handler.obtainMessage(STATUS_TRANSLATE, res);
 				handler.sendMessage(msg);
 				
-				ArrayList<String> urls = imageParser.parse(translate);
+				ArrayList<String> urls = ImageParser.parse(translate);
 				if (urls == null) return;
 				
 				for (String url : urls) {
