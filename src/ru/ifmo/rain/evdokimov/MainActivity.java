@@ -10,23 +10,20 @@ import android.os.Bundle;
 import android.view.View;
 
 public class MainActivity extends Activity {
-	ArrayList<String> ans;
+	String ans;
 
 	class MainView extends View {
 		Paint paint = new Paint();
 		public MainView(Context context) throws IOException {
 			super(context);
-
-			ImageParser parser = new ImageParser();
-			String query = "cat";
-			ans = parser.parse(query);
+			Translate tr = new Translate();
+			ans = tr.getTranslate("sword");
+			
 		}
 
 		@Override
 		public void onDraw(Canvas canvas) {
-			for (int i = 0; i < 10; i++) {
-				canvas.drawText(i +  ") "+ ans.get(i), 5, 20 + i * 50, paint);
-			}
+			canvas.drawText(ans, 10, 10, new Paint());
 		}
 	}
 
