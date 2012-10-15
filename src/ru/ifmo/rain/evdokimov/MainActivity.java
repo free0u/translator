@@ -1,30 +1,59 @@
 package ru.ifmo.rain.evdokimov;
 
 import android.app.Activity;
-import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
-public class MainActivity extends Activity {
-	class MainView extends View {
-		public MainView(Context context) {
-			super(context);
-		}
-		
-		@Override
-		public void onDraw(Canvas canvas) {
-			Paint paint = new Paint();
-			paint.setColor(Color.YELLOW);
-			canvas.drawRect(10, 10, 110, 110, paint);
-		}
+public class MainActivity extends Activity implements OnClickListener {
+	Button btnTranslate;
+	TextView tView;
+	EditText eText;
+	
+	// clear input form
+	@Override
+	public void onResume() {
+		super.onResume();
+		eText.setText("");
 	}
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(new MainView(this));
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setContentView(R.layout.main);
+        
+        btnTranslate = (Button)findViewById(R.id.button1);
+        tView = (TextView)findViewById(R.id.textView1);
+        eText = (EditText)findViewById(R.id.editText1);
+        
+        btnTranslate.setOnClickListener(this);
     }
+
+
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.button1:
+			Intent intent = new Intent(this, TranslateActivity.class);
+			String textToTranslate = eText.getText().toString();
+			
+			if (textToTranslate.length() == 0) {
+				Toast.makeText(getApplicationContext(), R.string.emptystring, Toast.LENGTH_SHORT).show();
+				return;
+			}
+			
+			intent.putExtra("text", textToTranslate);
+			
+			startActivity(intent);
+			break;
+		default:
+			break;
+		}
+	}
 }

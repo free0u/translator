@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Translate</string>
+    <string name="entertext">Введите слово на английском</string>
+    <string name="totranslate">Перевести</string>
+    <string name="translate">Перевод: </string>
+    <string name="emptystring">Введите слово</string>
 </resources>
