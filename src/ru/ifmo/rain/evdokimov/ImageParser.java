@@ -1,17 +1,13 @@
 package ru.ifmo.rain.evdokimov;
 
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 
 public class ImageParser {
-	public ImageParser() {
 
-	}
-
-	public ArrayList<String> parse(String query) throws IOException {
+	public static ArrayList<String> parse(String query) {
 		// typical query: http://www.google.ru/search?q=my+query&tbm=isch
 		query = query.replace(' ', '+');
 		final ArrayList<String> imageUrls = new ArrayList<String>();
@@ -34,10 +30,10 @@ public class ImageParser {
 							page.append(buffer);
 						}
 					}
-					
+
 					int startUrl, finishUrl;
 					for (int i = 0; i < 10; i++) {
-						//parsing address
+						// parsing address
 						startUrl = page.indexOf("imgurl") + 7;
 						finishUrl = page.indexOf("&amp", startUrl);
 						imageUrls.add(page.substring(startUrl, finishUrl));
@@ -55,8 +51,8 @@ public class ImageParser {
 		t.start();
 		try {
 			t.join();
-		} catch (InterruptedException e) {
-		
+		} catch (Exception e) {
+			return null;
 		}
 		return imageUrls;
 	}
