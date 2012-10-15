@@ -14,9 +14,6 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
 public class Translate {
-	public Translate() {
-	}
-
 	static String res = null;
 
 	public static String getTranslate(String s) {

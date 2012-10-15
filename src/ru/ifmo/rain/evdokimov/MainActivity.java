@@ -16,7 +16,6 @@ public class MainActivity extends Activity {
 		public MainView(Context context) throws IOException {
 			super(context);
 			ans = Translate.getTranslate("piece death");
-			
 		}
 
 		@Override
