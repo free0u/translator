@@ -33,10 +33,6 @@ public class TranslateActivity extends Activity {
 	LayoutInflater lInflater;
 	Message msg;
 	
-	private String getTranslate(String s) {
-		return "hello";
-	}
-	
 	private void update() {
 		Intent intent = getIntent();
 		final String translate = intent.getExtras().getString("text");
@@ -60,7 +56,7 @@ public class TranslateActivity extends Activity {
 		
 		Thread th = new Thread(new Runnable() {
 			public void run() {
-				String res = getTranslate(translate);
+				String res = Translate.getTranslate(translate);
 				msg = handler.obtainMessage(STATUS_TRANSLATE, res);
 				handler.sendMessage(msg);
 				
