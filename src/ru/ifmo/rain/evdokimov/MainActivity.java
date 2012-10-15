@@ -1,7 +1,6 @@
 package ru.ifmo.rain.evdokimov;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -16,8 +15,7 @@ public class MainActivity extends Activity {
 		Paint paint = new Paint();
 		public MainView(Context context) throws IOException {
 			super(context);
-			Translate tr = new Translate();
-			ans = tr.getTranslate("sword");
+			ans = Translate.getTranslate("piece death");
 			
 		}
 

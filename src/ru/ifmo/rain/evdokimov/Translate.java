@@ -7,23 +7,19 @@ import java.net.URL;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 
-import org.w3c.dom.CharacterData;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
-import android.renderscript.Element;
-
 public class Translate {
 	public Translate() {
 	}
 
-	String res = null;
+	static String res = null;
 
-	public String getTranslate(String s) {
+	public static String getTranslate(String s) {
 
 		s = s.replace(' ', '+');
 		final String urlString = "http://translate.yandex.net/api/v1/tr/translate?lang=en-ru&text="
@@ -56,7 +52,7 @@ public class Translate {
 
 		}
 		if (res == null) {
-			return "Перевод не найден1";
+			return "Перевод не найден";
 		} else {
 			
 			try {
@@ -65,12 +61,11 @@ public class Translate {
 				String translated = new String();
 				for (int i = 0; i < texts.getLength(); i++) {
 					Node child = texts.item(i);
-					//Node child = ((Node) text).getFirstChild();
-					translated += child.getTextContent();//getNodeValue();
+					translated += child.getTextContent();
 				}
-				return translated + "3";
+				return translated;
 			} catch (Exception e) {
-				return "Перевод не найден2";
+				return "Перевод не найден";
 			}
 			
 		}
