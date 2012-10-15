@@ -1,6 +1,5 @@
 package ru.ifmo.rain.evdokimov;
 
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
